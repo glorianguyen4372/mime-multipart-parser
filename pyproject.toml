@@ -1,6 +1,6 @@
 [project]
 name = "mime-multipart-parser"
-version = "0.1.0"
+version = "0.1.1"
 description = "Parses RFC 2046 multipart MIME bodies into part dictionaries with headers and decoded content."
 requires-python = ">=3.10"
 dependencies = []
