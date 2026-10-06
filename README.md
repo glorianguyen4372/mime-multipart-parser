@@ -35,3 +35,10 @@ The trade-off: the library does not decode transfer encodings (base64, quoted-pr
 The parser accepts bodies with no closing delimiter (`--boundary--`). RFC 2046 requires one, but real-world data — truncated captures, partial streams, incomplete writes — often lacks it. Rather than raise, the parser returns whatever parts it found, including a final part if there was content after the last opening delimiter. If this matters to you, check whether your source guarantees a closing delimiter and validate accordingly.
 
 Header line folding (RFC 822 continuation lines starting with whitespace) is handled. Repeated headers with the same name are joined with `", "` rather than last-wins.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
